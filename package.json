@@ -5,7 +5,9 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node app.ts"
+    "start": "ts-node app.ts",
+    "build": "tsc",
+    "start:prod": "node dist/app.js"
   },
   "author": "Sothyrith Hy",
   "license": "ISC",
@@ -16,7 +18,6 @@
     "ws": "^7.5.3"
   },
   "devDependencies": {
-    "@types/localtunnel": "^2.0.1",
     "@types/ws": "^7.4.7"
   }
 }
