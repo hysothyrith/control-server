@@ -46,7 +46,7 @@ type ArgFlag = "port" | "authtoken" | "region" | undefined;
   });
 
   if (!authToken) {
-    console.log(
+    console.error(
       "An ngrok authtoken is required. You can get one at https://ngrok.com/"
     );
     process.exit(0);
@@ -54,12 +54,12 @@ type ArgFlag = "port" | "authtoken" | "region" | undefined;
 })();
 
 (async function start() {
-  console.log("Control Server is starting up...\n");
+  console.info("Control Server is starting up...\n");
 
   const wss = new Server({ port });
 
   wss.on("listening", async () => {
-    console.log(`Control Server running locally on port ${port}`);
+    console.info(`Control Server running locally on port ${port}`);
 
     const url = await ngrok.connect({
       authtoken: authToken,
@@ -67,7 +67,7 @@ type ArgFlag = "port" | "authtoken" | "region" | undefined;
       addr: port,
     });
     const socketUrl = url.replace("https://", "wss://");
-    console.log(
+    console.info(
       "\x1b[32m%s\x1b[0m",
       `\nControl Server is live at ${socketUrl}\n`
     );
@@ -75,7 +75,7 @@ type ArgFlag = "port" | "authtoken" | "region" | undefined;
 
   wss.on("connection", (ws) => {
     ws.on("message", async (message) => {
-      console.log(`Received: '${message}'`);
+      console.info(`Received: '${message}'`);
       await control(message.toString());
     });
 
@@ -91,8 +91,13 @@ type ArgFlag = "port" | "authtoken" | "region" | undefined;
         await keyboard.type(Key.Left);
         break;
       default:
-        console.log(`Ignored action of type: '${action}'`);
+        console.info(`Ignored action of type: '${action}'`);
         break;
     }
   }
+
+  process.on("SIGINT", () => {
+    wss.close();
+    process.exit();
+  });
 })();
