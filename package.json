@@ -1,0 +1,23 @@
+{
+  "name": "control-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node app.ts"
+  },
+  "author": "Sothyrith Hy",
+  "license": "ISC",
+  "dependencies": {
+    "@nut-tree/nut-js": "^1.7.0",
+    "dotenv": "^10.0.0",
+    "localtunnel": "^2.0.1",
+    "ngrok": "^4.1.0",
+    "ws": "^7.5.3"
+  },
+  "devDependencies": {
+    "@types/localtunnel": "^2.0.1",
+    "@types/ws": "^7.4.7"
+  }
+}
