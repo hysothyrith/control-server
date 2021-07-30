@@ -18,7 +18,16 @@ npm i
 cp .env.example .env
 ```
 
-Sign up for an [ngrok](https://ngrok.com/) account. Then copy your Authtoken from the ngrok dashboard into `.env`.
+You have two options for tunneling into the local WebSocket server:
+
+- localtunnel: no sign-up needed, allows setting a custom subdomain, but doesn’t support setting a region
+- ngrok: requires signing up for a free account, but allows choosing a limited selection of regions for better response time
+
+Control Server is configured to use localtunnel by default.
+
+#### Using with ngrok
+
+Sign up for an [ngrok](https://ngrok.com/) account. Then copy your Authtoken from the ngrok dashboard into `.env`. Set the `TUNNEL` in `.env` to ngrok.
 
 ### 3. Control
 
